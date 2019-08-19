@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListTasksComponent } from './tasks/list-tasks.component';
 import { HomeComponent } from './tasks/home.component';
-import { PageNotFoundComponent } from './tasks/page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
