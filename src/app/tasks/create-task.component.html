@@ -1,1 +1,28 @@
-<p>create-task works!</p>
+<form #taskForm="ngForm" (ngSubmit)="createNewTask(taskForm)">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Create New Task
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" class="form-control" [(ngModel)]="title">
+            </div>
+            <div class="form-group">
+                <label for="executor">Executor</label>
+                <input type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor">
+            </div>
+            <div class="form-group">
+                <label for="taskBody">Task Body</label>
+                <input type="text" name="taskBody" id="taskBody" class="form-control" [(ngModel)]="taskBody">
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </div>
+</form>
+
+form value {{taskForm.value | json}}

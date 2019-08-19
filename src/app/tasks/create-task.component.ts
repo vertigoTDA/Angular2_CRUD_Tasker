@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-task',
@@ -12,4 +13,7 @@ export class CreateTaskComponent implements OnInit {
   ngOnInit() {
   }
 
+  createNewTask(createForm: NgForm): void {
+    console.log(createForm.value);
+  }
 }
