@@ -11,13 +11,26 @@
                 <input type="text" name="title" id="title" class="form-control" [(ngModel)]="title">
             </div>
 
-            <div class="form-group">
-                <label for="executor">
-                    Executor
-                </label>
-                <select type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor">
-                    <option *ngFor="let exec of executors" [value]="exec.id">{{exec.name}}</option>
-                </select>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="executor">
+                        Executor
+                    </label>
+                    <select type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor">
+                        <option *ngFor="let exec of executors" [value]="exec.id">{{exec.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <img [src]="executorPhotopath" class="imgClass" *ngIf="executor">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="deadEnd">Dead End</label>
+                    <input id="deadEnd" name="deadEnd" [(ngModel)]="deadEnd" type="text" bsDatepicker
+                        [bsConfig]="datepickerConfig" class="form-control">
+                </div>
             </div>
 
             <div class="form-group">
