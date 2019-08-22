@@ -1,4 +1,4 @@
-<form #taskForm="ngForm" (ngSubmit)="createNewTask(taskForm)" >
+<form #taskForm="ngForm" (ngSubmit)="createNewTask(taskForm)">
     <div class="panel panel-primary">
         <div class="panel-heading">
             Create New Task
@@ -16,7 +16,8 @@
                     <label for="executor">
                         Executor
                     </label>
-                    <select type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor" (ngModelChange)="execPhotoPath(executor)">
+                    <select type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor"
+                        (ngModelChange)="execPhotoPath(executor)">
                         <option *ngFor="let exec of executors" [value]="exec.id">{{exec.name}}</option>
                     </select>
                 </div>
@@ -27,15 +28,20 @@
 
             <div class="row">
                 <div class="form-group col-xs-4">
-                    <label for="deadEnd">Dead End</label>
-                    <input id="deadEnd" name="deadEnd" [(ngModel)]="deadEnd" type="text" bsDatepicker
+                    <label for="deadLine">Dead Line</label>
+                    <input id="deadLine" name="deadLine" [(ngModel)]="deadLine" type="text" bsDatepicker
                         [bsConfig]="datepickerConfig" class="form-control">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="taskBody">Task Body</label>
-                <input type="text" name="taskBody" id="taskBody" class="form-control" [(ngModel)]="taskBody">
+                <textarea rows="5" length="120" type="text" type="text" name="taskBody" id="taskBody" class="form-control" [(ngModel)]="taskBody"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea rows="2" length="120" type="text" name="notes" id="notes" class="form-control" [(ngModel)]="notes"></textarea>
             </div>
 
         </div>

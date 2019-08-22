@@ -3,7 +3,7 @@ export class Task {
     status: string;
     importance: number;
     date: Date;
-    deadEnd?: Date;
+    deadLine?: Date;
     creator: string;
     executor: string;
     executorPhotoPath?: string;
