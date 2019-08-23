@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Executor } from '../models/executor.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { exec } from 'child_process';
+import { Task } from '../models/task.model';
 
 @Component({
   selector: 'app-create-task',
@@ -11,6 +11,20 @@ import { exec } from 'child_process';
 })
 
 export class CreateTaskComponent implements OnInit {
+
+  task: Task = {
+    id: null,
+    status: null,
+    importance: null,
+    date: null,
+    deadLine: null,
+    creator: null,
+    executor: null,
+    executorPhotoPath: null,
+    title: null,
+    taskBody: null,
+    notes: null
+  }
 
   executors: Executor[] = [
     { id: 1, name: 'Executor#1', photoPath: 'assets/images/1.png' },
@@ -21,6 +35,8 @@ export class CreateTaskComponent implements OnInit {
   ];
 
   executorPhotoPath: string;
+
+  executorId: number;
 
   datepickerConfig: Partial<BsDatepickerConfig>;
 
@@ -38,9 +54,9 @@ export class CreateTaskComponent implements OnInit {
   ngOnInit() {
   }
 
-  createNewTask(createForm: NgForm): void {
-    console.log(createForm.value);
-    console.log(createForm.value.executor);
+  createNewTask(newTask: Task): void {
+    newTask.executorPhotoPath = this.executors[+newTask.executor - 1].photoPath;
+    console.log(newTask);
   }
 
 }

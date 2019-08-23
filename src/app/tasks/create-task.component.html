@@ -1,4 +1,4 @@
-<form #taskForm="ngForm" (ngSubmit)="createNewTask(taskForm)">
+<form #taskForm="ngForm" (ngSubmit)="createNewTask(task)">
     <div class="panel panel-primary">
         <div class="panel-heading">
             Create New Task
@@ -9,7 +9,7 @@
             <div class="form-group" [class.has-error]="titleControl.invalid && titleControl.touched"
                 [class.has-success]="titleControl.valid">
                 <label for="title" class="control-label">Title</label>
-                <input required type="text" name="title" id="title" class="form-control" [(ngModel)]="title"
+                <input required type="text" name="title" id="title" class="form-control" [(ngModel)]="task.title"
                     #titleControl="ngModel">
                 <span class="help-block" *ngIf="titleControl.invalid && titleControl.touched">
                     Title is required
@@ -23,7 +23,7 @@
                         Executor
                     </label>
                     <select required type="text" name="executor" id="executor" class="form-control"
-                        [(ngModel)]="executor" #executorControl="ngModel">
+                        [(ngModel)]="task.executor" #executorControl="ngModel">
                         <option *ngFor="let exec of executors" [value]="exec.id">{{exec.name}}</option>
                     </select>
                     <span class="help-block" *ngIf="executorControl.invalid && executorControl.touched">
@@ -32,14 +32,14 @@
                 </div>
 
                 <div class="form-group">
-                    <img src="{{executors[executor-1].photoPath}}" class="imgClass" *ngIf="executor" />
+                    <img src="{{executors[task.executor-1].photoPath}}" class="imgClass" *ngIf="task.executor" />
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-xs-4">
                     <label for="deadLine">Dead Line</label>
-                    <input id="deadLine" name="deadLine" [(ngModel)]="deadLine" type="text" bsDatepicker
+                    <input id="deadLine" name="deadLine" [(ngModel)]="task.deadLine" type="text" bsDatepicker
                         [bsConfig]="datepickerConfig" class="form-control">
                 </div>
             </div>
@@ -47,13 +47,13 @@
             <div class="form-group">
                 <label for="taskBody">Task Body</label>
                 <textarea rows="5" length="120" type="text" type="text" name="taskBody" id="taskBody"
-                    class="form-control" [(ngModel)]="taskBody"></textarea>
+                    class="form-control" [(ngModel)]="task.taskBody"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="notes">Notes</label>
                 <textarea rows="2" length="120" type="text" name="notes" id="notes" class="form-control"
-                    [(ngModel)]="notes"></textarea>
+                    [(ngModel)]="task.notes"></textarea>
             </div>
 
         </div>
