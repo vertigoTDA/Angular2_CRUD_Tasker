@@ -6,21 +6,31 @@
 
         <div class="panel-body">
 
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" class="form-control" [(ngModel)]="title">
+            <div class="form-group" [class.has-error]="titleControl.invalid && titleControl.touched"
+                [class.has-success]="titleControl.valid">
+                <label for="title" class="control-label">Title</label>
+                <input required type="text" name="title" id="title" class="form-control" [(ngModel)]="title"
+                    #titleControl="ngModel">
+                <span class="help-block" *ngIf="titleControl.invalid && titleControl.touched">
+                    Title is required
+                </span>
             </div>
 
-            <div class="row">
+            <div class="row" [class.has-error]="executorControl.invalid && executorControl.touched"
+                [class.has-success]="executorControl.valid">
                 <div class="form-group col-xs-4">
                     <label for="executor">
                         Executor
                     </label>
-                    <select type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor">
+                    <select required type="text" name="executor" id="executor" class="form-control"
+                        [(ngModel)]="executor" #executorControl="ngModel">
                         <option *ngFor="let exec of executors" [value]="exec.id">{{exec.name}}</option>
                     </select>
+                    <span class="help-block" *ngIf="executorControl.invalid && executorControl.touched">
+                        Executor field is empty
+                    </span>
                 </div>
-                
+
                 <div class="form-group">
                     <img src="{{executors[executor-1].photoPath}}" class="imgClass" *ngIf="executor" />
                 </div>
@@ -49,7 +59,7 @@
         </div>
 
         <div class="panel-footer">
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Create</button>
         </div>
     </div>
 </form>
