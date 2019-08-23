@@ -16,13 +16,13 @@
                     <label for="executor">
                         Executor
                     </label>
-                    <select type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor"
-                        (ngModelChange)="execPhotoPath(executor)">
+                    <select type="text" name="executor" id="executor" class="form-control" [(ngModel)]="executor">
                         <option *ngFor="let exec of executors" [value]="exec.id">{{exec.name}}</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
-                    <img src="{{executorPhotoPath}}" class="imgClass" *ngIf="executor" />
+                    <img src="{{executors[executor-1].photoPath}}" class="imgClass" *ngIf="executor" />
                 </div>
             </div>
 
@@ -36,12 +36,14 @@
 
             <div class="form-group">
                 <label for="taskBody">Task Body</label>
-                <textarea rows="5" length="120" type="text" type="text" name="taskBody" id="taskBody" class="form-control" [(ngModel)]="taskBody"></textarea>
+                <textarea rows="5" length="120" type="text" type="text" name="taskBody" id="taskBody"
+                    class="form-control" [(ngModel)]="taskBody"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="notes">Notes</label>
-                <textarea rows="2" length="120" type="text" name="notes" id="notes" class="form-control" [(ngModel)]="notes"></textarea>
+                <textarea rows="2" length="120" type="text" name="notes" id="notes" class="form-control"
+                    [(ngModel)]="notes"></textarea>
             </div>
 
         </div>

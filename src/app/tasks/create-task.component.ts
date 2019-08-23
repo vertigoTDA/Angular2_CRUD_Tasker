@@ -9,6 +9,7 @@ import { exec } from 'child_process';
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.css']
 })
+
 export class CreateTaskComponent implements OnInit {
 
   executors: Executor[] = [
@@ -30,7 +31,8 @@ export class CreateTaskComponent implements OnInit {
         showWeekNumbers: false,
         minDate: new Date(2019, 0, 1),
         dateInputFormat: 'DD/MM/YYYY'
-      });
+      }
+    );
   }
 
   ngOnInit() {
@@ -39,11 +41,6 @@ export class CreateTaskComponent implements OnInit {
   createNewTask(createForm: NgForm): void {
     console.log(createForm.value);
     console.log(createForm.value.executor);
-  }
-
-  execPhotoPath(execId: number): void {
-    this.executorPhotoPath = this.executors[execId-1].photoPath;
-    console.log(this.executorPhotoPath);
   }
 
 }

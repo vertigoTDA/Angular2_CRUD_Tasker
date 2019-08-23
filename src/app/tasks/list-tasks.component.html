@@ -1,14 +1,15 @@
 <div class="panel panel-primary" *ngFor="let task of tasks">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-sm-6 col-xs-6">
-                <button class="btn btn-info">{{task.id}}</button>
-                {{task.title}}
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                #{{task.id}}: {{task.title}}
             </div>
-            <div class="col-lg-2 col-sm-6 col-xs-6">{{task.date | date: 'fullDate'}}</div>
-            <div class="col-lg-2 col-sm-6 col-xs-6">{{task.executor}}</div>
-            <div class="col-lg-5 col-sm-6 col-xs-6" *ngIf="task.notes; else elseBlock">{{task.notes}}</div>
-            <ng-template  #elseBlock><div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">New task, notes is empty</div></ng-template>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">{{task.date | date: 'longDate'}}</div>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">{{task.executor}}</div>
+            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" *ngIf="task.notes; else elseBlock">{{task.notes}}</div>
+            <ng-template #elseBlock>
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">New task, notes is empty</div>
+            </ng-template>
         </div>
         <div class="row">
 
