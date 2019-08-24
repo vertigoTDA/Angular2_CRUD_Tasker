@@ -38,6 +38,28 @@
 
             <div class="row">
                 <div class="form-group col-xs-4">
+                    <label>Importance</label>
+                    <div class="form-control">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="radio-inline">
+                                    <input type="radio" name="importance" value="1"
+                                        [(ngModel)]="task.importance">Immediate
+                                </label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="radio-inline">
+                                    <input type="radio" name="importance" value="2" [(ngModel)]="task.importance">Not
+                                    Urgent
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xs-4">
                     <label for="deadLine">Dead Line</label>
                     <input id="deadLine" name="deadLine" [(ngModel)]="task.deadLine" type="text" bsDatepicker
                         [bsConfig]="datepickerConfig" class="form-control">
