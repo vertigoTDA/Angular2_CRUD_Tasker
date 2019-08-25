@@ -24,10 +24,13 @@
                     </label>
                     <select required type="text" name="executor" id="executor" class="form-control"
                         [(ngModel)]="task.executor" #executorControl="ngModel">
-                        <option *ngFor="let exec of executors" [value]="exec.id">{{exec.name}}</option>
+                        <option disabled [ngValue]="null">Select Executor</option>
+                        <option *ngFor="let exec of executors" [value]="exec.id">
+                            {{exec.name}}
+                        </option>
                     </select>
                     <span class="help-block" *ngIf="executorControl.invalid && executorControl.touched">
-                        Executor field is empty
+                        Executor is not selected
                     </span>
                 </div>
 

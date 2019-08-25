@@ -5,7 +5,7 @@ export class Task {
     date: Date;
     deadLine?: Date;
     creator: string;
-    executor: string;
+    executor: number;
     executorPhotoPath?: string;
     title: string;
     taskBody?: string;

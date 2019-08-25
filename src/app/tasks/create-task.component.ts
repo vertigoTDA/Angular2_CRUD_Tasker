@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Executor } from '../models/executor.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Task } from '../models/task.model';
+import { ExecutorService } from '../employees/executor.service';
 
 @Component({
   selector: 'app-create-task',
@@ -26,13 +27,7 @@ export class CreateTaskComponent implements OnInit {
     notes: null
   }
 
-  executors: Executor[] = [
-    { id: 1, name: 'Executor#1', photoPath: 'assets/images/1.png' },
-    { id: 2, name: 'Executor#2', photoPath: 'assets/images/2.png' },
-    { id: 3, name: 'Executor#3', photoPath: 'assets/images/3.png' },
-    { id: 4, name: 'Executor#4', photoPath: 'assets/images/4.png' },
-    { id: 5, name: 'Executor#5', photoPath: 'assets/images/5.png' }
-  ];
+  executors: Executor[];
 
   executorPhotoPath: string;
 
@@ -40,7 +35,7 @@ export class CreateTaskComponent implements OnInit {
 
   datepickerConfig: Partial<BsDatepickerConfig>;
 
-  constructor() {
+  constructor(private _executorService: ExecutorService) {
     this.datepickerConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
@@ -52,6 +47,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.executors = this._executorService.getExecutors();
   }
 
   createNewTask(newTask: Task): void {

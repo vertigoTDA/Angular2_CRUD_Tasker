@@ -4,8 +4,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
+
+import { TaskService } from './tasks/task.service';
+import { ExecutorService } from './employees/executor.service';
+
 import { AppComponent } from './app.component';
 import { ListTasksComponent } from './tasks/list-tasks.component';
 import { HomeComponent } from './tasks/home.component';
@@ -30,7 +33,10 @@ import { RecycleComponent } from './tasks/recycle.component';
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    TaskService,
+    ExecutorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
