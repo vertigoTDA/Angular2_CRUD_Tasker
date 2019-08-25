@@ -4,6 +4,8 @@ import { Executor } from '../models/executor.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Task } from '../models/task.model';
 import { ExecutorService } from '../employees/executor.service';
+import { TaskService } from './task.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-task',
@@ -35,7 +37,9 @@ export class CreateTaskComponent implements OnInit {
 
   datepickerConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private _executorService: ExecutorService) {
+  constructor(private _executorService: ExecutorService,
+              private _taskService: TaskService,
+              private _router: Router) {
     this.datepickerConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
@@ -50,9 +54,9 @@ export class CreateTaskComponent implements OnInit {
     this.executors = this._executorService.getExecutors();
   }
 
-  createNewTask(newTask: Task): void {
-    newTask.executorPhotoPath = this.executors[+newTask.executor - 1].photoPath;
-    console.log(newTask);
+  createNewTask(): void {
+    this._taskService.save(this.task);
+    this._router.navigate(['list']);
   }
 
 }

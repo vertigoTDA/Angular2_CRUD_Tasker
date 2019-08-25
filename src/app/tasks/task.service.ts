@@ -44,4 +44,8 @@ export class TaskService {
         return this.listTasks;
     }
 
+    save(task: Task) {
+        this.listTasks.push(task);
+    }
+
 }
