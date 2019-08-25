@@ -3,6 +3,9 @@ import { ActivationEnd } from '@angular/router';
 import { BrowserStack } from 'protractor/built/driverProviders';
 import { Task } from '../models/task.model';
 import { TaskService } from './task.service';
+import { Executor } from '../models/executor.model';
+import { ExecutorService } from '../employees/executor.service';
+
 
 
 @Component({
@@ -14,10 +17,14 @@ export class ListTasksComponent implements OnInit {
 
   tasks: Task[];
 
-  constructor(private _taskService: TaskService) { }
+  executors: Executor[];
+
+  constructor(private _taskService: TaskService,
+              private _executorService: ExecutorService) { }
 
   ngOnInit() {
     this.tasks = this._taskService.getTasks();
+    this.executors = this._executorService.getExecutors();
   }
 
 }

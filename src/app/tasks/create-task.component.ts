@@ -31,8 +31,6 @@ export class CreateTaskComponent implements OnInit {
 
   executors: Executor[];
 
-  executorPhotoPath: string;
-
   executorId: number;
 
   datepickerConfig: Partial<BsDatepickerConfig>;
@@ -55,8 +53,12 @@ export class CreateTaskComponent implements OnInit {
   }
 
   createNewTask(): void {
+    this.task.id = this._taskService.getTasks().length + 1;
+    this.task.date = new Date();
+    this.task.executorPhotoPath = this.executors[this.task.executor -1].photoPath;
     this._taskService.save(this.task);
     this._router.navigate(['list']);
+    console.log(this.task);
   }
 
 }

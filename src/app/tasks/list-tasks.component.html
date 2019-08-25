@@ -4,8 +4,15 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                 #{{task.id}}: {{task.title}}
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">{{task.date | date: 'longDate'}}</div>
-            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">{{task.executor}}</div>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">{{task.date | date: 'd/MM/yyyy, HH:mm'}}</div>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" [ngSwitch]="task.executor">
+                <span *ngSwitchCase="1">{{executors[task.executor-1].name}}</span>
+                <span *ngSwitchCase="2">{{executors[task.executor-1].name}}</span>
+                <span *ngSwitchCase="3">{{executors[task.executor-1].name}}</span>
+                <span *ngSwitchCase="4">{{executors[task.executor-1].name}}</span>
+                <span *ngSwitchCase="5">{{executors[task.executor-1].name}}</span>
+                <span *ngSwitchDefault>N/A</span>
+            </div>
             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" *ngIf="task.notes; else elseBlock">{{task.notes}}</div>
             <ng-template #elseBlock>
                 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">New task, notes is empty</div>
