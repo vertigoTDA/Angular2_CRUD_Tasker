@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CreateTaskComponent } from './tasks/create-task.component';
 import { RecycleComponent } from './tasks/recycle.component';
 import { DisplayTaskComponent } from './tasks/display-task.component';
+import { TaskDetailsComponent } from './tasks/task-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DisplayTaskComponent } from './tasks/display-task.component';
     PageNotFoundComponent,
     CreateTaskComponent,
     RecycleComponent,
-    DisplayTaskComponent
+    DisplayTaskComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,
