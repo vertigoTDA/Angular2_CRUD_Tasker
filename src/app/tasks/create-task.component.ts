@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Executor } from '../models/executor.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 
 export class CreateTaskComponent implements OnInit {
+
+  @ViewChild('taskForm', { static: false }) public createTaskComponent: NgForm;
 
   task: Task = {
     id: null,
@@ -36,8 +38,8 @@ export class CreateTaskComponent implements OnInit {
   datepickerConfig: Partial<BsDatepickerConfig>;
 
   constructor(private _executorService: ExecutorService,
-              private _taskService: TaskService,
-              private _router: Router) {
+    private _taskService: TaskService,
+    private _router: Router) {
     this.datepickerConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
@@ -55,7 +57,7 @@ export class CreateTaskComponent implements OnInit {
   createNewTask(): void {
     this.task.id = this._taskService.getTasks().length + 1;
     this.task.date = new Date();
-    this.task.executorPhotoPath = this.executors[this.task.executor -1].photoPath;
+    this.task.executorPhotoPath = this.executors[this.task.executor - 1].photoPath;
     this._taskService.save(this.task);
     this._router.navigate(['list']);
     console.log(this.task);

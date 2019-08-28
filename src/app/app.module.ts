@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { TaskService } from './tasks/task.service';
 import { ExecutorService } from './employees/executor.service';
+import { CreateTaskDeactivateGuardService } from './tasks/create-task-can-deactivate-guard.service';
 
 import { AppComponent } from './app.component';
 import { ListTasksComponent } from './tasks/list-tasks.component';
@@ -15,6 +16,7 @@ import { HomeComponent } from './tasks/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CreateTaskComponent } from './tasks/create-task.component';
 import { RecycleComponent } from './tasks/recycle.component';
+import { DisplayTaskComponent } from './tasks/display-task.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { RecycleComponent } from './tasks/recycle.component';
     HomeComponent,
     PageNotFoundComponent,
     CreateTaskComponent,
-    RecycleComponent
+    RecycleComponent,
+    DisplayTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { RecycleComponent } from './tasks/recycle.component';
   ],
   providers: [
     TaskService,
-    ExecutorService
+    ExecutorService,
+    CreateTaskDeactivateGuardService
   ],
   bootstrap: [AppComponent]
 })
