@@ -60,7 +60,6 @@ export class CreateTaskComponent implements OnInit {
     this.task.executorPhotoPath = this.executors[this.task.executor - 1].photoPath;
     this._taskService.save(this.task);
     this._router.navigate(['list']);
-    console.log(this.task);
   }
 
 }

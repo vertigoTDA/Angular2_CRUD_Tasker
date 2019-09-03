@@ -44,6 +44,11 @@ export class TaskService {
         return this.listTasks;
     }
 
+    getTask(id: number): Task {
+        console.log(id);
+        return this.listTasks.find(e => e.id === id);
+    }
+
     save(task: Task) {
         this.listTasks.push(task);
     }
