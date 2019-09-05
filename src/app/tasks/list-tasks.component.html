@@ -1,5 +1,6 @@
 <div class="form-group">
-    <input type="text" class="form-control" placeholder="Search by Title" style="width: 300px" [(ngModel)]="searchTerm" />
+    <input type="text" class="form-control" placeholder="Search by Title" style="width: 300px"
+        [(ngModel)]="searchTerm" />
 </div>
 <div *ngFor="let task of filteredTasks">
     <div class="panel panel-primary">
@@ -7,7 +8,7 @@
             <div class="row">
                 <div class="row col-lg-3 col-md-3 col-sm-6 col-xs-6">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        #{{task.id}}: 
+                        #{{task.id}}:
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                         <a class="cursorPointer" (click)="viewTaskInfo(task.id)">{{task.title}}</a>
@@ -22,7 +23,8 @@
                     <span *ngSwitchCase="5">{{executors[task.executor-1].name}}</span>
                     <span *ngSwitchDefault>N/A</span>
                 </div>
-                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" *ngIf="task.notes; else elseBlock">{{task.notes}}</div>
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" *ngIf="task.notes; else elseBlock">{{task.notes}}
+                </div>
                 <ng-template #elseBlock>
                     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">New task, notes is empty</div>
                 </ng-template>

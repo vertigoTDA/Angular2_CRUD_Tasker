@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Task } from '../models/task.model';
 import { Executor } from '../models/executor.model';
 import { TaskService } from './task.service';
@@ -16,7 +16,7 @@ export class ListTasksComponent implements OnInit {
   executors: Executor[];
 
   tasks: Task[];
-  
+
   filteredTasks: Task[];
 
   private _searchTerm: string;
@@ -27,9 +27,7 @@ export class ListTasksComponent implements OnInit {
 
   set searchTerm(value: string) {
     this._searchTerm = value;
-    console.log('value: ' + this._searchTerm);
     this.filteredTasks = this.filterTasks(value);
-    console.log('set:' + this.filteredTasks);
   }
 
   filterTasks(value: string) {
@@ -40,18 +38,25 @@ export class ListTasksComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private executorService: ExecutorService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
 
   ngOnInit() {
     this.tasks = this.taskService.getTasks();
-    this.filteredTasks = this.tasks;
     this.executors = this.executorService.getExecutors();
+    if (this.route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
+    } else {
+      this.filteredTasks = this.tasks;
+    }
   }
 
   viewTaskInfo(taskId: number): void {
-    this.router.navigate(['/task', taskId]);
+    this.router.navigate(['/task', taskId], {
+      queryParams: { 'searchTerm': this.searchTerm }
+    });
   }
 
 }
