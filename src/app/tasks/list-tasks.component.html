@@ -1,4 +1,7 @@
-<div *ngFor="let task of tasks">
+<div class="form-group">
+    <input type="text" class="form-control" placeholder="Search by Title" style="width: 300px" [(ngModel)]="searchTerm" />
+</div>
+<div *ngFor="let task of filteredTasks">
     <div class="panel panel-primary">
         <div class="container-fluid">
             <div class="row">

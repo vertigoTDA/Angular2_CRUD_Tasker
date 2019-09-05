@@ -13,24 +13,45 @@ import { ExecutorService } from '../employees/executor.service';
 })
 export class ListTasksComponent implements OnInit {
 
-  tasks: Task[];
-
   executors: Executor[];
 
+  tasks: Task[];
+  
+  filteredTasks: Task[];
+
+  private _searchTerm: string;
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    this._searchTerm = value;
+    console.log('value: ' + this._searchTerm);
+    this.filteredTasks = this.filterTasks(value);
+    console.log('set:' + this.filteredTasks);
+  }
+
+  filterTasks(value: string) {
+    return this.tasks.filter(task =>
+      task.title.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+  }
+
   constructor(
-    private _taskService: TaskService,
-    private _executorService: ExecutorService,
-    private _router: Router
+    private taskService: TaskService,
+    private executorService: ExecutorService,
+    private router: Router
   ) { }
 
 
   ngOnInit() {
-    this.tasks = this._taskService.getTasks();
-    this.executors = this._executorService.getExecutors();
+    this.tasks = this.taskService.getTasks();
+    this.filteredTasks = this.tasks;
+    this.executors = this.executorService.getExecutors();
   }
 
   viewTaskInfo(taskId: number): void {
-    this._router.navigate(['/task', taskId]);
+    this.router.navigate(['/task', taskId]);
   }
 
 }
