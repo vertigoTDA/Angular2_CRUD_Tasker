@@ -44,13 +44,15 @@ export class ListTasksComponent implements OnInit {
 
 
   ngOnInit() {
-    this.tasks = this.taskService.getTasks();
-    this.executors = this.executorService.getExecutors();
-    if (this.route.snapshot.queryParamMap.has('searchTerm')) {
-      this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
-    } else {
-      this.filteredTasks = this.tasks;
-    }
+    this.taskService.getTasks().subscribe((tskList) => {
+      this.tasks = tskList;
+      if (this.route.snapshot.queryParamMap.has('searchTerm')) {
+        this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
+      } else {
+        this.filteredTasks = this.tasks;
+      }
+    });
+    this.executorService.getExecutors().subscribe(exec => this.executors = exec);
   }
 
   viewTaskInfo(taskId: number): void {

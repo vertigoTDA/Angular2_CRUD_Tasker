@@ -19,16 +19,15 @@ export class TaskDetailsComponent implements OnInit {
   executors: Executor[];
 
   constructor(
-    private _activatedRoute: ActivatedRoute,
-    private _taskService: TaskService,
-    private _executorService: ExecutorService
+    private activatedRoute: ActivatedRoute,
+    private taskService: TaskService,
+    private executorService: ExecutorService
   ) { }
 
   ngOnInit() {
-    const id = +this._activatedRoute.snapshot.paramMap.get('id');
-    this.task = this._taskService.getTask(id);
-    this.executors = this._executorService.getExecutors();
-    console.log('ngOninit: ' + this.task);
+    const id = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.task = this.taskService.getTask(id);
+    this.executorService.getExecutors().subscribe(exec => this.executors = exec);
   }
 
 }
