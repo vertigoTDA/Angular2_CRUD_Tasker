@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Task } from '../models/task.model';
 import { Executor } from '../models/executor.model';
-import { TaskService } from './task.service';
 import { ExecutorService } from '../employees/executor.service';
 
 
@@ -36,23 +35,21 @@ export class ListTasksComponent implements OnInit {
   }
 
   constructor(
-    private taskService: TaskService,
     private executorService: ExecutorService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.tasks = this.route.snapshot.data['taskList'];
+    if (this.route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
+    } else {
+      this.filteredTasks = this.tasks;
+    }
+  }
 
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe((tskList) => {
-      this.tasks = tskList;
-      if (this.route.snapshot.queryParamMap.has('searchTerm')) {
-        this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
-      } else {
-        this.filteredTasks = this.tasks;
-      }
-    });
-    this.executorService.getExecutors().subscribe(exec => this.executors = exec);
+    this.executors = this.executorService.getExecutors();
   }
 
   viewTaskInfo(taskId: number): void {
@@ -60,5 +57,4 @@ export class ListTasksComponent implements OnInit {
       queryParams: { 'searchTerm': this.searchTerm }
     });
   }
-
 }

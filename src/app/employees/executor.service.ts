@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Executor } from '../models/executor.model';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/internal/operators';
-
 
 @Injectable()
 export class ExecutorService {
@@ -14,7 +11,7 @@ export class ExecutorService {
         { id: 5, name: 'Executor#5', photoPath: 'assets/images/5.png' }
       ];
 
-    getExecutors(): Observable<Executor[]> {
-        return of(this.listExecutors).pipe(delay(2000));
+    getExecutors(): Executor[] {
+        return this.listExecutors;
     }
 }

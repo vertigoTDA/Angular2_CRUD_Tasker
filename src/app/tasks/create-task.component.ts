@@ -31,16 +31,17 @@ export class CreateTaskComponent implements OnInit {
     notes: null
   }
 
+  tasks: Task[];
+
   executors: Executor[];
 
   executorId: number;
 
   datepickerConfig: Partial<BsDatepickerConfig>;
 
-  constructor(
-    private executorService: ExecutorService,
-    private taskService: TaskService,
-    private router: Router) {
+  constructor(private _executorService: ExecutorService,
+    private _taskService: TaskService,
+    private _router: Router) {
     this.datepickerConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
@@ -52,15 +53,16 @@ export class CreateTaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.executorService.getExecutors().subscribe(exec => this.executors = exec);
+    this.executors = this._executorService.getExecutors();
   }
 
   createNewTask(): void {
-    this.taskService.getTasks().subscribe(tskList => this.task.id = tskList.length + 1);
+    this._taskService.getTasks().subscribe(tsk => this.tasks = tsk);
+    this.task.id = this.tasks.length +1;
     this.task.date = new Date();
     this.task.executorPhotoPath = this.executors[this.task.executor - 1].photoPath;
-    this.taskService.save(this.task);
-    this.router.navigate(['list']);
+    this._taskService.save(this.task);
+    this._router.navigate(['list']);
   }
 
 }

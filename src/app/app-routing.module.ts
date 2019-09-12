@@ -9,10 +9,15 @@ import { RecycleComponent } from './tasks/recycle.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { CreateTaskDeactivateGuardService } from './tasks/create-task-can-deactivate-guard.service';
+import { TaskListResolverService } from './tasks/task-list-resolver.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'list', component: ListTasksComponent },
+  {
+    path: 'list',
+    component: ListTasksComponent,
+    resolve: { taskList: TaskListResolverService }
+  },
   { path: 'task/:id', component: TaskDetailsComponent },
   {
     path: 'newTask',
