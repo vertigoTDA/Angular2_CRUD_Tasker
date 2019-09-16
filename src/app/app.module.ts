@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TaskService } from './tasks/task.service';
 import { ExecutorService } from './employees/executor.service';
 import { CreateTaskDeactivateGuardService } from './tasks/create-task-can-deactivate-guard.service';
+import { ExecutorResolverService } from './employees/executor-resolver.service';
 
 import { AppComponent } from './app.component';
 import { ListTasksComponent } from './tasks/list-tasks.component';
@@ -39,7 +40,8 @@ import { TaskDetailsComponent } from './tasks/task-details.component';
   providers: [
     TaskService,
     ExecutorService,
-    CreateTaskDeactivateGuardService
+    CreateTaskDeactivateGuardService,
+    ExecutorResolverService
   ],
   bootstrap: [AppComponent]
 })

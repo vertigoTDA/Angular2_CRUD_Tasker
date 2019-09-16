@@ -5,7 +5,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Task } from '../models/task.model';
 import { ExecutorService } from '../employees/executor.service';
 import { TaskService } from './task.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-task',
@@ -29,7 +29,7 @@ export class CreateTaskComponent implements OnInit {
     title: null,
     taskBody: null,
     notes: null
-  }
+  };
 
   tasks: Task[];
 
@@ -39,30 +39,39 @@ export class CreateTaskComponent implements OnInit {
 
   datepickerConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private _executorService: ExecutorService,
-    private _taskService: TaskService,
-    private _router: Router) {
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+
     this.datepickerConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
         showWeekNumbers: false,
         minDate: new Date(2019, 0, 1),
         dateInputFormat: 'DD/MM/YYYY'
-      }
-    );
+    });
+
+
   }
 
   ngOnInit() {
-    this.executors = this._executorService.getExecutors();
+    this.executors = this.activatedRoute.snapshot.data['executors'];
+    this.taskService.getTasks().subscribe(tsk => this.tasks = tsk);
   }
 
   createNewTask(): void {
-    this._taskService.getTasks().subscribe(tsk => this.tasks = tsk);
+    this.taskService.getTasks().subscribe(tsk => this.tasks = tsk);
+    console.log(this.tasks);
+    console.log(this.executors);
     this.task.id = this.tasks.length +1;
     this.task.date = new Date();
+    console.log();
     this.task.executorPhotoPath = this.executors[this.task.executor - 1].photoPath;
-    this._taskService.save(this.task);
-    this._router.navigate(['list']);
+    console.log();
+    this.taskService.save(this.task);
+    console.log();
+    this.router.navigate(['list']);
   }
 
 }

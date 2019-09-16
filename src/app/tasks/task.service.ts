@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
 import { Observable } from 'rxjs';
-import { of } from "rxjs";
+import { of } from 'rxjs';
+import { delay } from 'rxjs/internal/operators';
 
 @Injectable()
 export class TaskService {
@@ -43,7 +44,7 @@ export class TaskService {
     ];
 
     getTasks(): Observable<Task[]> {
-        return of(this.listTasks);
+        return of(this.listTasks).pipe(delay(1000));
     }
 
     getTask(id: number): Task {

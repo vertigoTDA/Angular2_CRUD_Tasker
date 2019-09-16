@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TaskListResolverService implements Resolve<Task[]> {
-  private data: Task[];
-  
+
   constructor(private taskService: TaskService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task[]> {

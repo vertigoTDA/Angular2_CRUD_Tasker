@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Task } from '../models/task.model';
 import { Executor } from '../models/executor.model';
-import { ExecutorService } from '../employees/executor.service';
-
 
 @Component({
   selector: 'app-list-tasks',
@@ -35,11 +33,11 @@ export class ListTasksComponent implements OnInit {
   }
 
   constructor(
-    private executorService: ExecutorService,
     private router: Router,
     private route: ActivatedRoute
   ) {
     this.tasks = this.route.snapshot.data['taskList'];
+    this.executors = this.route.snapshot.data['executors'];
     if (this.route.snapshot.queryParamMap.has('searchTerm')) {
       this.searchTerm = this.route.snapshot.queryParamMap.get('searchTerm');
     } else {
@@ -48,9 +46,7 @@ export class ListTasksComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    this.executors = this.executorService.getExecutors();
-  }
+  ngOnInit() {}
 
   viewTaskInfo(taskId: number): void {
     this.router.navigate(['/task', taskId], {

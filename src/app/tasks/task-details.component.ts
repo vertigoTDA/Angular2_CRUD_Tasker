@@ -4,8 +4,6 @@ import { Task } from '../models/task.model';
 import { Executor } from '../models/executor.model';
 
 import { TaskService } from './task.service';
-import { ExecutorService } from '../employees/executor.service';
-
 
 @Component({
   selector: 'app-task-details',
@@ -19,16 +17,14 @@ export class TaskDetailsComponent implements OnInit {
   executors: Executor[];
 
   constructor(
-    private _activatedRoute: ActivatedRoute,
-    private _taskService: TaskService,
-    private _executorService: ExecutorService
-  ) { }
-
-  ngOnInit() {
-    const id = +this._activatedRoute.snapshot.paramMap.get('id');
-    this.task = this._taskService.getTask(id);
-    this.executors = this._executorService.getExecutors();
-    console.log('ngOninit: ' + this.task);
+    private activatedRoute: ActivatedRoute,
+    private taskService: TaskService,
+  ) {
+    const id = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.task = this.taskService.getTask(id);
+    this.executors = this.activatedRoute.snapshot.data['executors'];
   }
+
+  ngOnInit() {}
 
 }
