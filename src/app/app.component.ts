@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular2CRUDTasker';
+  showLoadingIndicator = true;
+  constructor(private router: Router) {
+    this.router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        this.showLoadingIndicator = true;
+      }
+      if (routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
+        this.showLoadingIndicator = false;
+      }
+    });
+  }
 }
