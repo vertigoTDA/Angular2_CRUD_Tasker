@@ -62,15 +62,10 @@ export class CreateTaskComponent implements OnInit {
 
   createNewTask(): void {
     this.taskService.getTasks().subscribe(tsk => this.tasks = tsk);
-    console.log(this.tasks);
-    console.log(this.executors);
     this.task.id = this.tasks.length +1;
     this.task.date = new Date();
-    console.log();
     this.task.executorPhotoPath = this.executors[this.task.executor - 1].photoPath;
-    console.log();
     this.taskService.save(this.task);
-    console.log();
     this.router.navigate(['list']);
   }
 
