@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CreateTaskDeactivateGuardService } from './tasks/create-task-can-deactivate-guard.service';
 import { TaskListResolverService } from './tasks/task-list-resolver.service';
 import { ExecutorResolverService } from './employees/executor-resolver.service';
+import { TaskDetaislGuardService } from './tasks/task-details-guard.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: 'task/:id',
     component: TaskDetailsComponent,
+    canActivate: [TaskDetaislGuardService],
     resolve: {
       taskList: TaskListResolverService,
       executors: ExecutorResolverService
@@ -40,7 +42,10 @@ const routes: Routes = [
   },
   { path: 'recycle', component: RecycleComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  {
+    path: 'notfound',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

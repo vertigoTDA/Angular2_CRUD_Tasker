@@ -10,6 +10,7 @@ import { TaskService } from './tasks/task.service';
 import { ExecutorService } from './employees/executor.service';
 import { CreateTaskDeactivateGuardService } from './tasks/create-task-can-deactivate-guard.service';
 import { ExecutorResolverService } from './employees/executor-resolver.service';
+import { TaskDetaislGuardService } from './tasks/task-details-guard.service';
 
 import { AppComponent } from './app.component';
 import { ListTasksComponent } from './tasks/list-tasks.component';
@@ -41,7 +42,8 @@ import { TaskDetailsComponent } from './tasks/task-details.component';
     TaskService,
     ExecutorService,
     CreateTaskDeactivateGuardService,
-    ExecutorResolverService
+    ExecutorResolverService,
+    TaskDetaislGuardService
   ],
   bootstrap: [AppComponent]
 })
