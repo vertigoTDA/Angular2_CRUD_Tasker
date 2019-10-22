@@ -28,8 +28,22 @@
         </div>
     </div>
     <div class="panel panel-footer">
-        <a class="btn btn-primary" routerLink="/list" queryParamsHandling="preserve">
-            Back to list
-        </a>
+        <div class="row">
+            <div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <button class="btn btn-primary" routerLink="/list" queryParamsHandling="preserve">
+                    Back to list
+                </button>
+            </div>
+            <div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <button class="btn btn-primary" (click)="editTask()">
+                    Edit
+                </button>
+            </div>
+            <div class="row col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <button class="btn btn-danger">
+                    Delete
+                </button>
+            </div>
+        </div>
     </div>
 </div>

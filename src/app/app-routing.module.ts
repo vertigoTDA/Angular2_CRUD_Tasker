@@ -33,7 +33,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'newTask',
+    path: 'edit/:id',
     component: CreateTaskComponent,
     canDeactivate: [CreateTaskDeactivateGuardService],
     resolve: {

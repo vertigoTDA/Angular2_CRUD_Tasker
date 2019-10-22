@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from '../models/task.model';
 import { Executor } from '../models/executor.model';
 
@@ -19,6 +19,7 @@ export class TaskDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private taskService: TaskService,
+    private router: Router
   ) {
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.task = this.taskService.getTask(id);
@@ -26,5 +27,9 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  editTask() {
+    this.router.navigate(['/edit', this.task.id]);
+  }
 
 }

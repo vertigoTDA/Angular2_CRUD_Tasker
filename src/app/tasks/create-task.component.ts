@@ -17,19 +17,7 @@ export class CreateTaskComponent implements OnInit {
 
   @ViewChild('taskForm', { static: false }) public createTaskComponent: NgForm;
 
-  task: Task = {
-    id: null,
-    status: null,
-    importance: null,
-    date: null,
-    deadLine: null,
-    creator: null,
-    executor: null,
-    executorPhotoPath: null,
-    title: null,
-    taskBody: null,
-    notes: null
-  };
+  task: Task;
 
   tasks: Task[];
 
@@ -42,7 +30,8 @@ export class CreateTaskComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute
+    ) {
 
     this.datepickerConfig = Object.assign({},
       {
@@ -52,12 +41,33 @@ export class CreateTaskComponent implements OnInit {
         dateInputFormat: 'DD/MM/YYYY'
     });
 
-
   }
 
   ngOnInit() {
     this.executors = this.activatedRoute.snapshot.data['executors'];
     this.taskService.getTasks().subscribe(tsk => this.tasks = tsk);
+    const id = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.getTask(id);
+  }
+
+  private getTask(id: number){
+    if (id ===0) {
+      this.task = {
+        id: null,
+        status: null,
+        importance: null,
+        date: null,
+        deadLine: null,
+        creator: null,
+        executor: null,
+        executorPhotoPath: null,
+        title: null,
+        taskBody: null,
+        notes: null
+      }
+    } else {
+        this.task = this.taskService.getTask(id);
+    }
   }
 
   createNewTask(): void {
